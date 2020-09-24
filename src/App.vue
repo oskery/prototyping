@@ -1,11 +1,52 @@
 <template>
   <div id="app">
-    <div class="strap">
+    <div class="strap strap-1">
       <div class="left">
-        <div class="green" :style="{ width: green + '%' }" @click="increaseColor('green')"></div>
-        <div class="pink" :style="{ width: pink + '%' }" @click="increaseColor('pink')"></div>
-        <div class="orange" :style="{ width: orange + '%' }" @click="increaseColor('orange')"></div>
-        <div class="red" :style="{ width: red + '%' }" @click="increaseColor('red')"></div>
+        <div
+          class="green"
+          :style="{ width: green + '%' }"
+          @click="increaseColor('green')"
+        ></div>
+        <div
+          class="pink"
+          :style="{ width: pink + '%' }"
+          @click="increaseColor('pink')"
+        ></div>
+        <div
+          class="orange"
+          :style="{ width: orange + '%' }"
+          @click="increaseColor('orange')"
+        ></div>
+        <div
+          class="red"
+          :style="{ width: red + '%' }"
+          @click="increaseColor('red')"
+        ></div>
+      </div>
+      <div class="right green" @click="resetColors"></div>
+    </div>
+    <div class="strap strap-2" v-if="false">
+      <div class="left">
+        <div
+          class="green"
+          :style="{ width: green + '%' }"
+          @click="increaseColor('green')"
+        ></div>
+        <div
+          class="pink"
+          :style="{ width: pink + '%' }"
+          @click="increaseColor('pink')"
+        ></div>
+        <div
+          class="orange"
+          :style="{ width: orange + '%' }"
+          @click="increaseColor('orange')"
+        ></div>
+        <div
+          class="red"
+          :style="{ width: red + '%' }"
+          @click="increaseColor('red')"
+        ></div>
       </div>
       <div class="right green" @click="resetColors"></div>
     </div>
@@ -30,7 +71,7 @@ export default {
     },
     resetColors() {
       this.lastCleared = 'green'
-      this.green = 10, this.pink = 25, this.orange = 60, this.red = 100
+      ;(this.green = 10), (this.pink = 25), (this.orange = 60), (this.red = 100)
     }
   }
 }
@@ -55,10 +96,15 @@ body {
   overflow: hidden;
   border: 3px solid white;
   margin-bottom: 20px;
-  .left > div, .right {
-      cursor: pointer;
+}
+
+.strap-1 {
+  .left > div,
+  .right {
+    cursor: pointer;
   }
-  .left > div:hover, .right:hover {
+  .left > div:hover,
+  .right:hover {
     filter: brightness(1.2);
   }
   .left {
@@ -78,6 +124,10 @@ body {
     flex: 1;
   }
 }
+
+.strap-2 {
+}
+
 .red {
   background: #e0424d;
 }
