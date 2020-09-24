@@ -2,51 +2,46 @@
   <div id="app">
     <div class="strap strap-1">
       <div class="left">
-        <div
-          class="green"
-          :style="{ width: green + '%' }"
-          @click="increaseColor('green')"
-        ></div>
-        <div
-          class="pink"
-          :style="{ width: pink + '%' }"
-          @click="increaseColor('pink')"
-        ></div>
-        <div
-          class="orange"
-          :style="{ width: orange + '%' }"
-          @click="increaseColor('orange')"
-        ></div>
-        <div
-          class="red"
-          :style="{ width: red + '%' }"
-          @click="increaseColor('red')"
-        ></div>
-      </div>
-      <div class="right green" @click="resetColors"></div>
-    </div>
-    <div class="strap strap-2" v-if="false">
-      <div class="left">
-        <div
-          class="green"
-          :style="{ width: green + '%' }"
-          @click="increaseColor('green')"
-        ></div>
-        <div
-          class="pink"
-          :style="{ width: pink + '%' }"
-          @click="increaseColor('pink')"
-        ></div>
-        <div
-          class="orange"
-          :style="{ width: orange + '%' }"
-          @click="increaseColor('orange')"
-        ></div>
-        <div
-          class="red"
-          :style="{ width: red + '%' }"
-          @click="increaseColor('red')"
-        ></div>
+        <div>
+          <div
+            class="green"
+            :style="{ width: green + '%' }"
+            @click="increaseColor('green')"
+          >
+            <icon-checkmark v-if="green === 100" />
+          </div>
+          <p v-if="green !== 100"><span>{{ green / 10 }}</span> / 10</p>
+        </div>
+        <div>
+          <div
+            class="pink"
+            :style="{ width: pink + '%' }"
+            @click="increaseColor('pink')"
+          >
+            <icon-checkmark v-if="pink === 100" />
+          </div>
+          <p v-if="pink !== 100"><span>{{ pink / 10 }}</span> / 10</p>
+        </div>
+        <div>
+          <div
+            class="orange"
+            :style="{ width: orange + '%' }"
+            @click="increaseColor('orange')"
+          >
+            <icon-checkmark v-if="orange === 100" />
+          </div>
+          <p v-if="orange !== 100"><span>{{ orange / 10 }}</span> / 10</p>
+        </div>
+        <div>
+          <div
+            class="red"
+            :style="{ width: red + '%' }"
+            @click="increaseColor('red')"
+          >
+            <icon-checkmark v-if="red === 100" />
+          </div>
+          <p v-if="red !== 100"><span>{{ red / 10 }}</span> / 10</p>
+        </div>
       </div>
       <div class="right green" @click="resetColors"></div>
     </div>
@@ -60,18 +55,26 @@ export default {
     return {
       lastCleared: 'green',
       green: 10,
-      pink: 25,
+      pink: 20,
       orange: 60,
       red: 100
     }
   },
+  computed: {
+    style(x) {
+      return { width: this[x] + '%' }
+    }
+  },
+  components: {
+    IconCheckmark: () => import('@/components/icons/IconCheckmark.vue')
+  },
   methods: {
     increaseColor(c) {
-      this[c] = this[c] + 20
+      this[c] = Math.min(this[c] + 20, 100)
     },
     resetColors() {
       this.lastCleared = 'green'
-      ;(this.green = 10), (this.pink = 25), (this.orange = 60), (this.red = 100)
+      ;(this.green = 10), (this.pink = 20), (this.orange = 60), (this.red = 100)
     }
   }
 }
@@ -79,19 +82,19 @@ export default {
 
 <style lang="less">
 body {
-  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background: #e9e9e9;
+  height: 200vh;
+  background: black; // #e9e9e9;
+  font-family: 'SquadaOne';
 }
 
 .strap {
   display: flex;
   background: white;
   border-radius: 10px;
-  width: 568px;
+  width: 562px;
   height: calc(320px - 120px);
   overflow: hidden;
   border: 3px solid white;
@@ -110,11 +113,27 @@ body {
   .left {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 75%;
     margin-right: 3px;
     > div {
       flex: 1;
-      transition: 1s width;
+      display: flex;
+      align-items: center;
+      > div {
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        color: rgba(black, .7);
+        height: 100%;
+        transition: 1s width;
+      }
+      p {
+        margin: 0 10px;
+        white-space: nowrap;        span {
+          font-size: 2rem;
+          font-weight:bold;
+        }
+      }
     }
     > div:not(:last-child) {
       margin-bottom: 3px;
@@ -145,5 +164,13 @@ button {
   font-size: 1.4rem;
   cursor: pointer;
   margin-right: 20px;
+}
+
+
+@font-face {
+  font-family: 'SquadaOne';
+  src: url('~@/assets/SquadaOne-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
 }
 </style>
